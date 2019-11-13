@@ -3,7 +3,7 @@ const router = require("express").Router();
 const Users = require("./users-model.js");
 const restricted = require("../auth/restricted-middleware.js");
 
-router.get("/", restricted, checkRole(["accounting", "admin"]), (req, res) => {
+router.get("/", restricted, checkDepartment(["department", "accounting"]), (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
@@ -13,9 +13,9 @@ router.get("/", restricted, checkRole(["accounting", "admin"]), (req, res) => {
 
 module.exports = router;
 
-function checkRole(roles) {
+function checkDepartment(departments) {
   return function(req, res, next) {
-    if (roles.includes(req.decodedJwt.role)) {
+    if (departments.includes(req.decodedJwt.department)) {
       next();
     } else {
       res.status(403).json({ message: "Can't touch this!" });
