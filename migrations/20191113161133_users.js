@@ -9,8 +9,8 @@ exports.up = function(knex) {
       users.string('password', 128).notNullable();
     });
   };
-  
-  exports.down = function(knex, Promise) {
+
+exports.down = function(knex, Promise) {
     return knex.schema.dropTableIfExists('users');
-  };
+};
   
