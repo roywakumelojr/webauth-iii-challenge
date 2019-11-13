@@ -53,7 +53,7 @@ router.post("/login", (req, res) => {
 function getJwtToken(username) {
   const payload = {
     username,
-    department: "Accounting"
+    department: "accounting"
   };
 
   const secret = process.env.JWT_SECRET || "is it secret, is it safe?";
